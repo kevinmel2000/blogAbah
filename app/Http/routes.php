@@ -106,3 +106,8 @@ Route::get('/',[
     'uses' => 'WebController@getIndex',
     'as'   => 'index'
 ]);
+
+Route::get('/about',[
+    'uses' => 'WebController@getAbout',
+    'as'   => 'about' 
+]);
