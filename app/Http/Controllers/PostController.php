@@ -33,12 +33,14 @@ class PostController extends Controller
     	$this->validate($request, [
             'title'                =>'required',
             'description'          =>'required',
+            'image-link'           =>'required|url'
         ]);
 
         $post  				= new Post;
         $post->title 		= $request->input('title');
         $post->body  		= $request->input('description');
         $post->user_id		= Auth::user()->id;
+        $post->image_url    = $request->input('image-link');
         $post->save();
 
         $message = "Success! ";
@@ -49,12 +51,14 @@ class PostController extends Controller
         $this->validate($request,[
             'title'         => 'required',
             'description'   => 'required',
+            'image-link'    => 'required|url'
         ]);
 
         $post = Post::find($id);        
-        $post->user_id = Auth::user()->id;
-        $post->title   = $request->input('title');
-        $post->body    = $request->input('description');
+        $post->user_id      = Auth::user()->id;
+        $post->title        = $request->input('title');
+        $post->body         = $request->input('description');
+        $post->image_url    = $request->input('image-link');
         $post->save();
 
         $message = "Post is updated";
@@ -73,6 +77,7 @@ class PostController extends Controller
 
     public function getPreviewPost($id){
         $post = Post::find($id);
+        // /return json_encode($post);
         return view('user.peview_post')->with(['post'=> $post]);
     }
 }

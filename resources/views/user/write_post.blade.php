@@ -72,6 +72,10 @@
                 <input type="text" class="form-control" name="title" aria-describedby="emailHelp" placeholder="Enter Title">
               </div>
               <div class="form-group">
+                <label for="exampleInputEmail1">Header Image</label>
+                <input type="text" class="form-control" name="image-link" aria-describedby="emailHelp" placeholder="Enter URL image">
+              </div>
+              <div class="form-group">
                 <label for="exampleInputPassword1">Text</label>
                 <textarea class="form-control" name="description" rows="3"></textarea>
               </div>

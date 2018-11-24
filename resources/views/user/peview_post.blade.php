@@ -67,31 +67,12 @@
           <h1>Preview Post</h1>
           <h4>Created at : {{$post->created_at}}</h4>
           <hr>
+          <img src="{{$post->image_url}}">
           <h2>{{$post->title}}</h2>
            {!! $post->body !!}.
         </div>
         <!-- /.container-fluid -->
         <!-- Modal -->
-			  <div class="modal fade" id="myModal" role="dialog">
-			    <div class="modal-dialog">
-			      <!-- Modal content-->
-			      <div class="modal-content">
-			      	<div class="modal-header">
-				        <h5 class="modal-title" id="exampleModalCenterTitle">Confirmation</h5>
-				        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-				          <span aria-hidden="true">&times;</span>
-				        </button>
-				      </div>
-			        <div class="modal-body">
-			          <p>Do you want to delete this post?</p>
-			        </div>
-			        <div class="modal-footer">
-			           <button type="button" class="btn btn-danger yesDelete">Yes</button>
-			           <button type="button" class="btn btn-default" data-dismiss="modal" id="noDelete">No</button>
-			        </div>
-			      </div>
-			    </div>
-			  </div>
         <!-- Sticky Footer -->
         <footer class="sticky-footer">
             <div class="container my-auto">

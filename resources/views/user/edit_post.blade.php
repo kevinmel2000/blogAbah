@@ -38,12 +38,12 @@
             <span title="setting profile">Profile</span>
           </a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item active">
           <a class="nav-link" href="{{route('dashboard.managePost')}}">
             <i class="fas fa-fw fa-chart-area"></i>
             <span>Manage Post</span></a>
         </li>
-         <li class="nav-item active">
+         <li class="nav-item ">
           <a class="nav-link" href="{{route('dashboard.writePost')}}">
            <i class="fas fa-feather-alt"></i>
             <span>Write New Post</span></a>
@@ -57,6 +57,7 @@
           <!-- Breadcrumbs-->
           <ol class="breadcrumb">
             <li class="breadcrumb-item">Dashboard</li>
+            <li class="breadcrumb-item">Manage Post</li>
             <li class="breadcrumb-item active" aria-current="page">Write Post</li>
           </ol>
 
@@ -66,10 +67,14 @@
           <!-- Page Content -->
          <h1>Edit Post</h1>
          <hr>
-         <form action="{{route('dashboard.post')}}" method="post">
+         <form action="{{route('dashboard.updatepost',['id' => $post->id])}}" method="post">
               <div class="form-group">
                 <label for="exampleInputEmail1">Tittle</label>
-                <input type="text" class="form-control" name="title" aria-describedby="emailHelp" placeholder="Enter Title" value="{{$post->title}}">
+                <input type="text" class="form-control" name="title" value="{{$post->title}}">
+              </div>
+              <div class="form-group">
+                <label for="exampleInputPassword1">Header Image</label>
+                <input type="text" class="form-control" name="image-link" value="{{$post->image_url}}">
               </div>
               <div class="form-group">
                 <label for="exampleInputPassword1">Text</label>
