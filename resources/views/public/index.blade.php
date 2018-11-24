@@ -29,10 +29,8 @@
                             Services
                         </a>
                     </li>
-
-
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="blog.html">
+                        <a class="nav-link text-white" href="{{route('blog')}}">
                             blog
                         </a>
                     </li>
