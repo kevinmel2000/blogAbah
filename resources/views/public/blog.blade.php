@@ -48,6 +48,16 @@
                         </a>
                     </li>
                 </ul>
+                <div class="search-box mr-lg-0">
+                    <input type="text" placeholder="Search here..." name="search1">
+                    <button type="submit"><i class="fa fa-search"></i></button>
+                    </form>
+                </div>
+                <div class="menu-icon d-lg-none">
+                    <span class="ml-auto"></span>
+                    <span class="ml-auto"></span>
+                    <span class="ml-auto"></span>
+                </div>
         </nav>
     </div>
 </header>

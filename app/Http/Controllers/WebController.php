@@ -12,7 +12,8 @@ use DB;
 class WebController extends Controller
 {
     public function getIndex(){
-    	return view('public.index');
+        $post  = $this->getOffset(0,2);
+    	return view('public.index')->with(['post' => $post]);
     }
 
     public function getAbout(){
@@ -53,8 +54,4 @@ class WebController extends Controller
                                           'page'        => $page
                                           ]);
     }
-
-
-
-    
 }

@@ -44,9 +44,9 @@
             <span>Manage Post</span></a>
         </li>
          <li class="nav-item">
-          <a class="nav-link" href="{{route('dashboard.writePost')}}">
+          <a class="nav-link" href="{{route('dashboard.image')}}">
            <i class="fas fa-feather-alt"></i>
-            <span>Write New Post</span></a>
+            <span>Upload Images</span></a>
         </li>
       </ul>
 

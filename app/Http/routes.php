@@ -98,6 +98,11 @@ Route::group(['middleware'=>'auth'],function(){
         'uses' => 'PostController@getPreviewPost',
         'as'   => 'dashboard.preview'
     ]);
+
+    Route::get('/dashboard/image',[
+        'uses' => 'PostController@getImage',
+        'as'   => 'dashboard.image'
+    ]);
 });
 
 /*for all*/

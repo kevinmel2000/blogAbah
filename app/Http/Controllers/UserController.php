@@ -111,4 +111,8 @@ class UserController extends Controller
         }
     }
 
+    public function getImageUpload(){  
+        return view('dashboard.image');
+    }
+
 }

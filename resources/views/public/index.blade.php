@@ -9,7 +9,7 @@
     <div class="container">
         <nav class="navbar navbar-expand p-0">
             <a class="navbar-brand mr-0 pr-4" href="index.html">
-                <img src="images/logo.png" alt="logo">
+                <img src="images/logo2.png" alt="logo">
             </a>
             <a href="javascript:void(0)" id="cls-btn">&times;</a>
             <div class="navbar-collapse nav-sec" id="sidenav">
@@ -278,36 +278,25 @@
                 typesetting industry. Lorem Ipsum has been the
                 industry's type specimen book. It has survived not only five centuries, but also the leap into
                 electronic typesetting,</p>
-
             <ul class="row">
+            @foreach ($post->chunk(2) as $chunk)
+                @foreach ($chunk as $post)
                 <li class="col-md-6">
                     <div class="overlay" data-aos="fade-up" data-aos-duration="1000">
                         <a href="blogsingle.html">
                             <div class="blog-img">
-                                <figure><img src="images/img-1.jpg" alt="img-1" class="img-fluid"></figure>
+                                <figure><img src="{{$post->image_url}}" alt="img-1" class="img-fluid"></figure>
                                 <div class="blog-img-inner"></div>
                             </div>
                             <h5>
-                                Girl wearing white frock holding coffee and posing for photo.
+                                {{$post->title}}
                             </h5>
                         </a>
                         <a href="blogsingle.html">read more</a>
                     </div>
                 </li>
-                <li class="col-md-6">
-                    <div class="overlay" data-aos="fade-up" data-aos-duration="1300">
-                        <a href="blogsingle.html">
-                            <div class="blog-img">
-                                <figure> <img src="images/img-2.jpg" alt="img-2" class="img-fluid"></figure>
-                                <div class="blog-img-inner"></div>
-                            </div>
-                            <h5>
-                                Man getting ready for photoshoot by wearing blue suit
-                            </h5>
-                        </a>
-                        <a href="blogsingle.html">read more</a>
-                    </div>
-                </li>
+                @endforeach
+            @endforeach
             </ul>
         </div>
     </div>

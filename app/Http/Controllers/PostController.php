@@ -80,4 +80,8 @@ class PostController extends Controller
         // /return json_encode($post);
         return view('user.peview_post')->with(['post'=> $post]);
     }
+
+    public function getImage(){
+        return view('user.image');
+    }
 }

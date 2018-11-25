@@ -1,11 +1,11 @@
 @extends('master.layout')
 
 @section('title')
-        Manage Post
+        Upload Image
 @endsection
 
 @section('content')
-    <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
+<nav class="navbar navbar-expand navbar-dark bg-dark static-top">
 
       <a class="navbar-brand mr-1" href="index.html">Dashboard aba</a>
 
@@ -48,6 +48,7 @@
            <i class="fas fa-feather-alt"></i>
             <span>Write New Post</span></a>
         </li>
+        </li>
         <li class="nav-item">
           <a class="nav-link" href="{{route('dashboard.image')}}">
            <i class="fas fa-feather-alt"></i>
@@ -62,44 +63,33 @@
           <!-- Breadcrumbs-->
           <ol class="breadcrumb">
             <li class="breadcrumb-item">Dashboard</li>
-            <li class="breadcrumb-item active" aria-current="page">Manage Post</li>
+            <li class="breadcrumb-item active" aria-current="page">Upload Image</li>
           </ol>
-
           <div class="container">
                @include('master.notif')
           </div>
           <!-- Page Content -->
-          <h1>Manage Post</h1>
+          <h1>Upload Image</h1>
           <hr>
+          <div class="containerfluid">
+          	 <button class="btn btn-primary" style="margin-bottom: 10px;">Upload New Image</button>
+          </div>
           <div class="card mb-3">
             <div class="card-header">
               <i class="fas fa-table"></i>
-              Post List</div>
+              Image List</div>
             <div class="card-body">
               <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
-                        <td>Judul</td>
-                        <td>Text</td>
-                        <td>Created At</td>
+                        <td>Title</td>
+                        <td>Image</td>
+                        <td>Created Date</td>
                         <td>Action Button</td>
                     </tr>
                   </thead>
-                    @foreach($post as $p)
-                    <tr>
-                      <td>{{$p->title}}</td>
-                      <td>{{$p->body}}</td>
-                      <td>{{$p->created_at}}</td>
-                      <td>
-                      	<div class="btn-group" role="group" aria-label="Basic example">
-                          <a href="{{route('dashboard.preview', ['id' => $p->id] )}}" class="button btn btn-info btn-sm">Preview</a>
-						              <a href="{{route('dashboard.edit', ['id' => $p->id] )}}" class="button btn btn-primary btn-sm"> Edit</a>
-                      		<a href="#" class="button btn btn-danger btn-sm delete-post" onclick="confimrationDelete({{$p->id}},)"> Delete</a>
-						            </div>
-                      </td>
-                    </tr>
-                    @endforeach
+                    
                   </tbody>
                 </table>
               </div>
@@ -143,9 +133,5 @@
       <!-- /.content-wrapper -->
 
     </div>
-    <!-- /#wrapper -->
-      <script type="text/javascript"> 
-        var delete_url  = '{{route('dashboard.deletePost')}}';
-        var urlData     = '{{route('dashboard.get_jsonpost')}}';
-      </script>
+
 @endsection

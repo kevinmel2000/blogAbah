@@ -188,7 +188,7 @@ header .navbar .header-nav {
 
 /* -----Banner------- */
 section.banner {
-    background: url(../images/banner.jpg);
+    background: url(../images/banner2.jpg);
     width: 100%;
     background-size: cover;
     background-repeat: no-repeat;
@@ -198,7 +198,7 @@ section.banner {
     display: -ms-flexbox;
     align-items: center;
     padding-top: 225px;
-    padding-bottom: 140px;
+    padding-bottom: 120px;
 }
 
 section.banner .container {
