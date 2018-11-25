@@ -30,7 +30,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="{{route('blog')}}">
+                        <a class="nav-link text-white" href="{{route('blog',['page'=> 1])}}">
                             Blog
                         </a>
                     </li>

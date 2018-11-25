@@ -112,7 +112,7 @@ Route::get('/about',[
     'as'   => 'about' 
 ]);
 
-Route::get('/blog',[
+Route::get('/blog/{page}',[
     'uses' => 'WebController@getBlog',
     'as'   => 'blog'
 ]);

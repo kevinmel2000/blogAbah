@@ -30,7 +30,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="{{route('blog')}}">
+                        <a class="nav-link text-white" href="{{route('blog',['page'=> 1])}}">
                             blog
                         </a>
                     </li>
@@ -49,7 +49,6 @@
 
                 </ul>
 
-                <!--
                 <div class="search-box mr-lg-0">
                     <input type="text" placeholder="Search here..." name="search1">
                     <button type="submit"><i class="fa fa-search"></i></button>
@@ -59,7 +58,7 @@
                     <span class="ml-auto"></span>
                     <span class="ml-auto"></span>
                     <span class="ml-auto"></span>
-                </div>-->
+                </div>
         </nav>
     </div>
 </header>

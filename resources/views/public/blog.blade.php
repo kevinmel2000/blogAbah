@@ -10,7 +10,7 @@
     <div class="container">
         <nav class="navbar navbar-expand p-0">
             <a class="navbar-brand mr-0 pr-4" href="index.html">
-                <img src="images/logo.png" alt="logo">
+                <img src="{{asset('images/logo.png')}}" alt="logo">
             </a>
             <a href="javascript:void(0)" id="cls-btn">&times;</a>
             <div class="navbar-collapse nav-sec" id="sidenav">
@@ -31,7 +31,7 @@
                         </a>
                     </li>
                     <li class="nav-item active">
-                        <a class="nav-link active text-white" href="{{route('blog')}}">
+                        <a class="nav-link active text-white" href="{{route('blog',['page'=> 1])}}">
                             Blog
                         </a>
                     </li>
@@ -64,151 +64,32 @@
         <h2 data-aos="fade-up" data-aos-duration="1000">read latest articles</h2>
         <ul class="row">
             @foreach ($post->chunk(2) as $chunk)
-                
-                    @foreach ($chunk as $post)
-                        <li class="col-md-6">
-                            <div class="overlay" data-aos="fade-up" data-aos-duration="1000">
-                                <a href="#">
-                                    <div class="blog-img">
-                                        <figure><img src="{{$post->image_url}}" alt="img" class="img-fluid"></figure>
-                                        <div class="blog-img-inner"></div>
-                                    </div>
-                                    <h5>
-                                        {{$post->title}}
-                                    </h5>
-                                </a>
-                                <a href="#">read more</a>
-                            </div>
-                        </li>
-                    @endforeach
-               
+                @foreach ($chunk as $post)
+                    <li class="col-md-6">
+                        <div class="overlay" data-aos="fade-up" data-aos-duration="1000">
+                            <a href="#" class="blog-container">
+                                <div class="blog-img">
+                                    <figure><img src="{{$post->image_url}}" alt="img" class="img-fluid"></figure>
+                                    <div class="blog-img-inner"></div>
+                                </div>
+                                <h5>
+                                    {{$post->title}}
+                                </h5>
+                            </a>
+                            <a href="#">read more</a>
+                        </div>
+                    </li>
+                @endforeach
             @endforeach
-            <!--
-            <li class="col-md-6">
-                <div class="overlay" data-aos="fade-up" data-aos-duration="1000">
-                    <a href="blogsingle.html">
-                        <div class="blog-img">
-                            <figure><img src="images/img-1.jpg" alt="img-1" class="img-fluid"></figure>
-
-                            <div class="blog-img-inner"></div>
-                        </div>
-                        <h5>
-                            Girl wearing white frock holding coffee and posing for photo.
-                        </h5>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
-                            been the industry's standard dummy text ever since the 1500s, when an unknown printer took
-                            a galley of type and scrambled it to make a type specimen book. It has survived not only
-                            five centuries...</p>
-                    </a>
-                    <a href="blogsingle.html">read more</a>
-                </div>
-            </li>
-
-            <li class="col-md-6">
-                <div class="overlay" data-aos="fade-up" data-aos-duration="1400">
-                    <a href="blogsingle.html">
-                        <div class="blog-img">
-                            <figure><img src="images/img-2.jpg" alt="img-2" class="img-fluid"></figure>
-                            
-                            <div class="blog-img-inner"></div>
-                        </div>
-                        <h5>
-                            Man getting ready for photoshoot by wearing blue suit
-                        </h5>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
-                            been the industry's standard dummy text ever since the 1500s, when an unknown printer took
-                            a galley of type and scrambled it to make a type specimen book. It has survived not only
-                            five centuries...</p>
-                    </a>
-                    <a href="blogsingle.html">read more</a>
-                </div>
-            </li>
-
-            <li class="col-md-6">
-                <div class="overlay" data-aos="fade-up" data-aos-duration="1000">
-                    <a href="blogsingle.html">
-                        <div class="blog-img">
-                            <figure><img src="images/img-1.jpg" alt="img-1" class="img-fluid"></figure>
-                            
-                            <div class="blog-img-inner"></div>
-                        </div>
-                        <h5>
-                            Girl wearing white frock holding coffee and posing for photo.
-                        </h5>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
-                            been the industry's standard dummy text ever since the 1500s, when an unknown printer took
-                            a galley of type and scrambled it to make a type specimen book. It has survived not only
-                            five centuries...</p>
-                    </a>
-                    <a href="blogsingle.html">read more</a>
-                </div>
-            </li>
-            <li class="col-md-6">
-                <div class="overlay" data-aos="fade-up" data-aos-duration="1400">
-                    <a href="blogsingle.html">
-                        <div class="blog-img">
-                            <figure><img src="images/img-2.jpg" alt="img-2" class="img-fluid"></figure>
-                            
-                            <div class="blog-img-inner"></div>
-                        </div>
-                        <h5>
-                            Man getting ready for photoshoot by wearing blue suit
-                        </h5>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
-                            been the industry's standard dummy text ever since the 1500s, when an unknown printer took
-                            a galley of type and scrambled it to make a type specimen book. It has survived not only
-                            five centuries...</p>
-                    </a>
-                    <a href="blogsingle.html">read more</a>
-                </div>
-            </li>
-
-
-            <li class="col-md-6">
-                <div class="overlay" data-aos="fade-up" data-aos-duration="1000">
-                    <a href="blogsingle.html">
-                        <div class="blog-img">
-                            <figure><img src="images/img-1.jpg" alt="img-1" class="img-fluid"></figure>
-                            
-                            <div class="blog-img-inner"></div>
-                        </div>
-                        <h5>
-                            Girl wearing white frock holding coffee and posing for photo.
-                        </h5>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
-                            been the industry's standard dummy text ever since the 1500s, when an unknown printer took
-                            a galley of type and scrambled it to make a type specimen book. It has survived not only
-                            five centuries...</p>
-                    </a>
-                    <a href="blogsingle.html">read more</a>
-                </div>
-            </li>
-            <li class="col-md-6">
-                <div class="overlay" data-aos="fade-up" data-aos-duration="1400">
-                    <a href="blogsingle.html">
-                        <div class="blog-img">
-                            <figure><img src="images/img-2.jpg" alt="img-2" class="img-fluid"></figure>
-                            
-                            <div class="blog-img-inner"></div>
-                        </div>
-                        <h5>
-                            Man getting ready for photoshoot by wearing blue suit
-                        </h5>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
-                            been the industry's standard dummy text ever since the 1500s, when an unknown printer took
-                            a galley of type and scrambled it to make a type specimen book. It has survived not only
-                            five centuries...</p>
-                    </a>
-                    <a href="blogsingle.html">read more</a>
-                </div>
-            </li>
-        -->
         </ul>
 
         <div class="navigation">
-            <ul>
-                <li> <a href="#"> < </a> </li>
-                <li><a href="#"> > </a></li>
+            <ul>@if($pageControl['prevPage']!==null)
+                    <li><a  href="{{route('blog',['page'=>($page-1)])}}"> < </a></li>
+                @endif
+                @if($pageControl['nextPage']!==null)
+                    <li><a  href="{{route('blog',['page'=>($page+1)])}}"> > </a></li>
+                @endif
             </ul>
         </div>
     </div>
@@ -298,5 +179,4 @@
 <button class="scrolltop-btn">
     <i class="fa fa-angle-up"></i>
 </button>
-
 @endsection
