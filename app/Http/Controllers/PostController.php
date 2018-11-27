@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Input;
 use App\Http\Requests;
 
 use App\Post;
 use Auth;
 use Session;
+use App\File;
+use Carbon\Carbon;
 
 class PostController extends Controller
 {
@@ -82,6 +84,40 @@ class PostController extends Controller
     }
 
     public function getImage(){
-        return view('user.image');
+        $file = File::all();
+        return view('user.image')->with(['image'=>$file]);
     }
+
+    public function getUploadImage(){
+        return view('user.upload_image');
+    }
+
+    public function postUploadImage(Request $request){
+        $this->validate($request,[
+            'image' => 'mimes:jpeg|dimensions:max_width=2500,max_height=2500'
+        ]);
+        $img            =  new File;
+        $now  = Carbon::now()->format('M_d_Y_H_i_s');
+        $img->title     = 'image_'.$now.'.jpg';
+        if (Input::hasFile('image')) {
+            $file = Input::file('image');
+            $file->move(public_path().'/',$img->title);
+            $img->name      = 'image'.$now.'.jpg';
+            $img->size      = $file->getClientsize();
+            $img->type      = $file->getClientMimeType();
+            $img->user_id   = Auth::user()->id;
+        }
+        $img->save();
+        $message = "Photo Sucessfully upload";
+        return redirect()->route('dashboard.image')->with(['success_message'=> $message]);
+    }
+
+    public function getDeleteImg( Request $request){
+        $img = File::find($request['id']);
+        $img->delete();
+        return response()->json([
+            'data' => $request['id']
+        ]);
+    }
+
 }

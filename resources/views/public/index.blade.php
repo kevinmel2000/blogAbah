@@ -126,18 +126,21 @@
     <div class="container">
         <div class="services-filter">
             <div class="service-list">
-                <h3 class="tab-link current" data-tab="tab-1">our portfolio</h3>
+                <h3 class="tab-link current" data-tab="tab-1">Photo Collection</h3>
                 <h3 class="tab-link" data-tab="tab-2">read articles</h3>
                 <h3 class="tab-link" data-tab="tab-3">our clients</h3>
                 <h3 class="tab-link" data-tab="tab-4">view pricing</h3>
             </div>
             <div class="service-images">
                 <ul id="tab-1" class="tab-content current">
+                    @foreach($img as $i)
                     <li data-aos="fade-up" data-aos-duration="1000">
-                        <a href="portfolio.html">
-                            <figure style="background:url(images/index-portfolio-1.jpg); background-position: center right"></figure>
+                        <a href="{{asset('/').$i->title}}">
+                            <figure style="background:url({{asset('/').$i->title}}); background-position: center right"></figure>
                         </a>
                     </li>
+                    @endforeach
+                    <!--
                     <li data-aos="fade-up" data-aos-duration="1200">
                         <a href="portfolio.html">
                             <figure style="background:url(images/index-portfolio-2.jpg); background-position: center"></figure>
@@ -163,6 +166,7 @@
                             <figure style="background:url(images/index-portfolio-6.jpg); background-position: center "></figure>
                         </a>
                     </li>
+                     -->
                 </ul>
                 <ul id="tab-2" class="tab-content article-section">
                     <li>
@@ -302,35 +306,7 @@
     </div>
 </section>
 
-<section class="index-contact">
-    <div class="layer">
-        <div class="container">
-            <h3 data-aos="zoom-in" data-aos-duration="1000">Got a project in mind? please contact and lets make awesome</h3>
-            <p data-aos="zoom-in" data-aos-duration="1000">Lorem Ipsum is simply dummy text of the printing and
-                typesetting industry. Lorem Ipsum has been the
-                industry's type specimen book. It has survived not only five centuries, but also the leap into
-                electronic typesetting,</p>
-            <form data-aos="fade-up" data-aos-duration="1000">
-                <ul class="row">
-                    <li class="col-md-4">
-                        <input type="text" required class="w-100" placeholder="Your Name">
-                    </li>
-                    <li class="col-md-4">
-                        <input type="email" required class="w-100" placeholder="Your Email Id">
-                    </li>
-                    <li class="col-md-4">
-                        <input type="text" required class="w-100" placeholder="Your Mobile No">
-                    </li>
-                    <li class="col-12">
-                        <textarea class="w-100" required placeholder="Your Message"></textarea>
-                    </li>
-                </ul>
-                <button type="submit">alright submit it</button>
-            </form>
-        </div>
-    </div>
-</section>
-
+@include('public.partials.contact')
 <footer>
     <div class="layer">
         <div class="container">

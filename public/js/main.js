@@ -1,4 +1,5 @@
 var postID;
+var potoID;
 
 $(document).ready(function(){
     $('.yesDelete').click(function(){
@@ -15,10 +16,31 @@ $(document).ready(function(){
 		    }
 		});
     });
+
+     $('.deletePic').click(function(){
+        	$.ajax({
+		    type: 'GET',
+		    dataType: 'JSON',
+		    data: { 	id: potoID  },
+		    url: delete_img,
+		    success: function(data){
+		       location.reload();
+		    },
+		    error: function(xhr){
+		        console.log(xhr.responseText);
+		    }
+		});
+    });
+
 });
 
 function confimrationDelete(id){
 	postID = id;
+	$('#myModal').modal();
+}
+
+function confirmPotoDelete(id){
+	potoID= id;
 	$('#myModal').modal();
 }
 

@@ -103,6 +103,21 @@ Route::group(['middleware'=>'auth'],function(){
         'uses' => 'PostController@getImage',
         'as'   => 'dashboard.image'
     ]);
+
+    Route::get('/dashboard/image/upload',[
+        'uses' => 'PostController@getUploadImage',
+        'as'   => 'dashboard.image.upload'
+    ]);
+
+    Route::post('/dashboard/image/upload',[
+        'uses' => 'PostController@postUploadImage',
+        'as'   => 'dashboard.image.post'
+    ]);
+
+    Route::get('/dashboard/image/delete_image',[
+        'uses' => 'PostController@getDeleteImg',
+        'as'   => 'dashboard.image.delete'
+    ]);
 });
 
 /*for all*/
@@ -120,5 +135,10 @@ Route::get('/about',[
 Route::get('/blog/{page}',[
     'uses' => 'WebController@getBlog',
     'as'   => 'blog'
+]);
+
+Route::post('/blog/post_comment',[
+    'uses' => 'WebController@postComment',
+    'as'   => 'comment'
 ]);
 

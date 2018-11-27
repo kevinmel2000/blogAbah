@@ -1,11 +1,11 @@
 @extends('master.layout')
 
 @section('title')
-        Manage Post
+        Upload Image
 @endsection
 
 @section('content')
-    <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
+<nav class="navbar navbar-expand navbar-dark bg-dark static-top">
 
       <a class="navbar-brand mr-1" href="index.html">Dashboard aba</a>
 
@@ -30,7 +30,8 @@
 
     <div id="wrapper">
 
-      @include('user.partials.sidebar')
+      <!-- Sidebar -->
+     @include('user.partials.sidebar')
 
       <div id="content-wrapper">
 
@@ -39,22 +40,25 @@
           <!-- Breadcrumbs-->
           <ol class="breadcrumb">
             <li class="breadcrumb-item">Dashboard</li>
-            <li class="breadcrumb-item active" aria-current="page">Manage Post</li>
+            <li class="breadcrumb-item active" aria-current="page">Upload Image</li>
           </ol>
-
           <div class="container">
                @include('master.notif')
           </div>
           <!-- Page Content -->
-          <h1>Preview Post</h1>
-          <h4>Created at : {{$post->created_at}}</h4>
-          <hr>
-          <img src="{{$post->image_url}}">
-          <h2>{{$post->title}}</h2>
-           {!! $post->body !!}.
-        </div>
+           <h1>Upload Image</h1>
+         <hr>
+         <form action="#" method="post" enctype="multipart/form-data" >
+            <div class="form-group">
+                <label >Upload New Image</label> <small>(Must be .jpeg  , max: 2500 x 2500 px)</small>
+                <input type="file" class="form-control-file" name="image">
+            </div>
+            <button type="submit" class="btn btn-primary mb-2">Upload Image</button>
+            {{ csrf_field() }}
+        </form>
+          
+    </div>
         <!-- /.container-fluid -->
-        <!-- Modal -->
         <!-- Sticky Footer -->
         <footer class="sticky-footer">
             <div class="container my-auto">
@@ -68,9 +72,5 @@
       <!-- /.content-wrapper -->
 
     </div>
-    <!-- /#wrapper -->
-      <script type="text/javascript"> 
-        var delete_url  = '{{route('dashboard.deletePost')}}';
-        var urlData     = '{{route('dashboard.get_jsonpost')}}';
-      </script>
+
 @endsection

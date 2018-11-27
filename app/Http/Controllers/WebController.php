@@ -1,19 +1,24 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\User;
 use App\Post;
+use App\Comment;
 use DB;
 
 class WebController extends Controller
 {
     public function getIndex(){
-        $post  = $this->getOffset(0,2);
-    	return view('public.index')->with(['post' => $post]);
+        $post  = $this->getOffset('post',0,2);
+        $whereClause = ['value'  => 'id',
+                        'clause' => '!=',
+                        'value2' =>  1   ];
+        $file  = $this->getOffset('files',0,6, $whereClause);
+    	return view('public.index')->with(['post' => $post,
+                                           'img'  => $file ]);
     }
 
     public function getAbout(){
@@ -27,16 +32,30 @@ class WebController extends Controller
         return $count;
     }
 
-    public function getOffset($skip,$limit){
-        $post  = collect(DB::table('post')->skip($skip)->take($limit)->get());
-        return $post;
+    public function getOffset($table,$skip,$limit,$whereClause=null){
+        if ($whereClause) {
+            $item  = collect(DB::table($table)
+                    ->skip($skip)
+                    ->take($limit)
+                    ->where($whereClause['value'],
+                            $whereClause['clause'],
+                            $whereClause['value2'])
+                    ->get());
+        }
+        else{
+            $item  = collect(DB::table($table)
+                    ->skip($skip)
+                    ->take($limit)
+                    ->get());
+        }
+        return $item;
     }
 
     public function getBlog($page){
         $page         = (int)$page;
         $limit        = 6;
         $offset       = ($limit * ($page-1));
-    	$post         = $this->getOffset($offset,$limit);
+    	$post         = $this->getOffset('post',$offset,$limit);
         $count        = $this->countPost();
         $totalPage    = (int)ceil($count/$limit);
         $pageControl  = [ 'nextPage' =>null,
@@ -53,5 +72,23 @@ class WebController extends Controller
                                           'pageControl' => $pageControl,
                                           'page'        => $page
                                           ]);
+    }
+
+    public function postComment(Request $request)
+    {
+        $this->validate($request,[
+            'name'     =>  'required',
+            'email'    =>  'email|required',
+            'message'  =>  'required',
+            'mobile'   =>  'required|min:11|numeric',
+        ]);
+
+        $comment = new Comment;
+        $comment->name    = $request->input('name');
+        $comment->email   = $request->input('email');
+        $comment->message = $request->input('message');
+        $comment->mobile  = $request->input('mobile');
+        $comment->save();
+        return redirect()->back();
     }
 }

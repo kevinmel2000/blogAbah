@@ -1,7 +1,7 @@
 @extends('master.layout')
 
 @section('title')
-        Upload Image
+        Image Dashboard
 @endsection
 
 @section('content')
@@ -30,31 +30,7 @@
 
     <div id="wrapper">
 
-      <!-- Sidebar -->
-      <ul class="sidebar navbar-nav">
-        <li class="nav-item ">
-          <a class="nav-link" href="{{route('dashboard.landing')}}">
-            <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span title="setting profile">Profile</span>
-          </a>
-        </li>
-        <li class="nav-item active">
-          <a class="nav-link" href="{{route('dashboard.managePost')}}">
-            <i class="fas fa-fw fa-chart-area"></i>
-            <span>Manage Post</span></a>
-        </li>
-         <li class="nav-item">
-          <a class="nav-link" href="{{route('dashboard.writePost')}}">
-           <i class="fas fa-feather-alt"></i>
-            <span>Write New Post</span></a>
-        </li>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{{route('dashboard.image')}}">
-           <i class="fas fa-feather-alt"></i>
-            <span>Upload Images</span></a>
-        </li>
-      </ul>
+      @include('user.partials.sidebar')
 
       <div id="content-wrapper">
 
@@ -72,7 +48,7 @@
           <h1>Upload Image</h1>
           <hr>
           <div class="containerfluid">
-          	 <button class="btn btn-primary" style="margin-bottom: 10px;">Upload New Image</button>
+          	 <a href="{{route('dashboard.image.upload')}}" class="btn btn-primary" style="margin-bottom: 10px;">Upload New Image</a>
           </div>
           <div class="card mb-3">
             <div class="card-header">
@@ -83,12 +59,30 @@
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
-                        <td>Title</td>
-                        <td>Image</td>
-                        <td>Created Date</td>
-                        <td>Action Button</td>
+                        <th>Title</th>
+                        <th>Image</th>
+                        <th>Image URL</th>
+                        <th>Created Date</th>
+                        <th>Action Button</th>
                     </tr>
                   </thead>
+                   @foreach($image as $i)
+                    <tr>
+                      <td>{{$i->title}}</td>
+                      <td><img src="{{ asset('/').$i->title}}" class="rounded image-profile"></td>
+                      <td class="copy">{{ asset('/').$i->title}}</td>
+                      <td>{{$i->created_at}}</td>
+                      <td>
+                        <div class="btn-group" role="group" >
+                          @if($i->title=='poto_profile.jpg')
+                            <a href="#" class="btn btn-danger btn-sm disabled" role="button" aria-disabled="true">Delete</a>
+                          @else
+                            <a href="#" class="button btn btn-danger btn-sm delete-image" onclick="confirmPotoDelete({{$i->id}})"> Delete</a>
+                          @endif
+                        </div>
+                      </td>
+                    </tr>
+                    @endforeach
                     
                   </tbody>
                 </table>
@@ -111,10 +105,10 @@
 				        </button>
 				      </div>
 			        <div class="modal-body">
-			          <p>Do you want to delete this post?</p>
+			          <p>Do you want to delete this Image?</p>
 			        </div>
 			        <div class="modal-footer">
-			           <button type="button" class="btn btn-danger yesDelete">Yes</button>
+			           <button type="button" class="btn btn-danger deletePic">Yes</button>
 			           <button type="button" class="btn btn-default" data-dismiss="modal" id="noDelete">No</button>
 			        </div>
 			      </div>
@@ -133,5 +127,7 @@
       <!-- /.content-wrapper -->
 
     </div>
-
+   <script type="text/javascript"> 
+        var delete_img  = '{{route('dashboard.image.delete')}}';
+    </script>
 @endsection
