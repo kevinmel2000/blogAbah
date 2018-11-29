@@ -23,8 +23,10 @@ class UserController extends Controller
     public function getDasboardPage(){
         $imageProfile = File::where('user_id',Auth::user()->id)->first();
         $userData     = User::find(Auth::user()->id);
+        $modul        = 'profile';
         return view('user.dashboard')->with(['photo'    => $imageProfile->name,
-                                              'user'    => $userData     ]);
+                                              'user'    => $userData,  
+                                              'modul'   => $modul]);
     }
 
     public function postLogin(Request $request){

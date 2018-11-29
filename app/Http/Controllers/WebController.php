@@ -12,18 +12,23 @@ use DB;
 class WebController extends Controller
 {
     public function getIndex(){
+        $modul = 'index';
         $post  = $this->getOffset('post',0,2);
+        $sixpost = $this->getOffset('post',0,6);
         $whereClause = ['value'  => 'id',
                         'clause' => '!=',
                         'value2' =>  1   ];
         $file  = $this->getOffset('files',0,6, $whereClause);
     	return view('public.index')->with(['post' => $post,
-                                           'img'  => $file ]);
+                                           'img'  => $file,
+                                            'modul'=> $modul,
+                                            'sixpost'=> $sixpost]);
     }
 
     public function getAbout(){
     	$user = User::all()->first();
-    	return view('public.about')->with(['user' => $user]);
+        $modul = 'about';
+    	return view('public.about')->with(['user' => $user, 'modul' => $modul]);
     }
 
     public function countPost(){
@@ -52,6 +57,7 @@ class WebController extends Controller
     }
 
     public function getBlog($page){
+        $modul = 'blog';
         $page         = (int)$page;
         $limit        = 6;
         $offset       = ($limit * ($page-1));
@@ -70,16 +76,16 @@ class WebController extends Controller
                                           'count'       => $count,
                                           'totalPage'   => $totalPage,
                                           'pageControl' => $pageControl,
-                                          'page'        => $page
+                                          'page'        => $page,
+                                          'modul'       => $modul,
                                           ]);
     }
 
-    public function postComment(Request $request)
-    {
+    public function postComment(Request $request){
         $this->validate($request,[
             'name'     =>  'required',
             'email'    =>  'email|required',
-            'message'  =>  'required',
+            'message'  =>  'required|max:1000',
             'mobile'   =>  'required|min:11|numeric',
         ]);
 

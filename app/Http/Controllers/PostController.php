@@ -7,7 +7,9 @@ use Illuminate\Support\Facades\Input;
 use App\Http\Requests;
 
 use App\Post;
+use App\Comment;
 use Auth;
+use DB;
 use Session;
 use App\File;
 use Carbon\Carbon;
@@ -16,7 +18,9 @@ class PostController extends Controller
 {
     public function getManagePost(){
     	$post = Post::all();
-        return view('user.manage_post')->with(['post'=> $post]);
+        $modul = 'manage';
+        return view('user.manage_post')->with(['post'=> $post,
+                                               'modul' => $modul]);
     }
 
     public function getDeletePost( Request $request){
@@ -28,7 +32,8 @@ class PostController extends Controller
     }
 
     public function getWritePost(){
-    	return view('user.write_post');
+        $modul = 'write';
+    	return view('user.write_post')->with(['modul'=>$modul]);
     }
 
     public function postWritePost(Request $request){
@@ -69,7 +74,8 @@ class PostController extends Controller
 
     public function getEditPost($id){
         $post = Post::find($id);
-        return view('user.edit_post')->with(['post'=>$post]);
+        $modul = "manage";
+        return view('user.edit_post')->with(['post'=>$post , 'modul' => $modul]);
     }
 
     public function getJsonPost(){
@@ -79,17 +85,19 @@ class PostController extends Controller
 
     public function getPreviewPost($id){
         $post = Post::find($id);
-        // /return json_encode($post);
-        return view('user.peview_post')->with(['post'=> $post]);
+        $modul = "manage";
+        return view('user.peview_post')->with(['post'=> $post, 'modul' => $modul]);
     }
 
     public function getImage(){
+        $modul = "image";
         $file = File::all();
-        return view('user.image')->with(['image'=>$file]);
+        return view('user.image')->with(['image'=>$file, 'modul'=> $modul]);
     }
 
     public function getUploadImage(){
-        return view('user.upload_image');
+        $modul = "image";
+        return view('user.upload_image')->with(['modul' => $modul]);
     }
 
     public function postUploadImage(Request $request){
@@ -118,6 +126,60 @@ class PostController extends Controller
         return response()->json([
             'data' => $request['id']
         ]);
+    }
+
+    public function getComment($page){
+        $modul          = 'comment';
+        $page           = (int)$page;
+        $limit          = 10;
+        $offset         = ($limit * ($page-1));
+        $comment        = $this->getOffset('comment',$offset,$limit);
+        $count          = $this->countComment();
+        $totalPage      = (int)ceil($count/$limit);
+        $pageControl    = [ 'nextPage' =>null,
+                            'prevPage' =>null];
+
+        if ((($page==1) && ($totalPage !==1)) || $page < $totalPage ) {
+            $pageControl['nextPage']=1;
+        }
+        if (($page<=$totalPage) && ($page!==1)){
+            $pageControl['prevPage']=1;
+        }
+
+        return view('user.comment')->with(['comment'      => $comment , 
+                                            'modul'       => $modul,
+                                            'count'       => $count,
+                                            'totalPage'   => $totalPage,
+                                            'pageControl' => $pageControl,
+                                            'page'        => $page
+                                        ]);
+
+    }
+
+    public function getOffset($table,$skip,$limit,$whereClause=null){
+        if ($whereClause) {
+            $item  = collect(DB::table($table)
+                    ->skip($skip)
+                    ->take($limit)
+                    ->where($whereClause['value'],
+                            $whereClause['clause'],
+                            $whereClause['value2'])
+                    ->get());
+        }
+        else{
+            $item  = collect(DB::table($table)
+                    ->skip($skip)
+                    ->take($limit)
+                    ->orderBy($table .'.updated_at','DESC')
+                    ->get());
+        }
+        return $item;
+    }
+
+    public function countComment(){
+        $allComment = Comment::all();
+        $count   = count($allComment);
+        return $count;
     }
 
 }

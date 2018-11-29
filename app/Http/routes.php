@@ -118,6 +118,11 @@ Route::group(['middleware'=>'auth'],function(){
         'uses' => 'PostController@getDeleteImg',
         'as'   => 'dashboard.image.delete'
     ]);
+
+    Route::get('/dashboard/comment/{page}',[
+        'uses'  => 'PostController@getComment',
+        'as'    => 'dashboard.comment'
+    ]);
 });
 
 /*for all*/
