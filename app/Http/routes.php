@@ -147,3 +147,13 @@ Route::post('/blog/post_comment',[
     'as'   => 'comment'
 ]);
 
+Route::get('/blog/read/{id}',[
+    'uses' => 'WebController@getReadBlog',
+    'as'   => 'readBlog'
+]);
+
+Route::post('/blog/comment/{blogId}',[
+    'uses' => 'WebController@postBlogComment',
+    'as'   => 'commentBlog'
+]);
+

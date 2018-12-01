@@ -8,7 +8,7 @@ use App\User;
 use App\Post;
 use App\Comment;
 use DB;
-
+use App\BlogComment;
 class WebController extends Controller
 {
     public function getIndex(){
@@ -94,6 +94,37 @@ class WebController extends Controller
         $comment->email   = $request->input('email');
         $comment->message = $request->input('message');
         $comment->mobile  = $request->input('mobile');
+        $comment->save();
+        return redirect()->back();
+    }
+
+    public function getReadBlog($id)
+    {
+        $post = Post::find($id);
+        $comment = BlogComment::where('blog_id',$id)->get();
+        $modul = 'blog';
+        $user  = User::find($post->user_id);
+        return view('public.blogsingle')->with(['modul' => $modul,
+                                                'post'  => $post,
+                                                'author'=> $user->name,
+                                                'comment'=> $comment]);
+    }
+
+    public function postBlogComment( Request $request , $blogId){
+       //
+        $this->validate($request,[
+            'nama'      => 'required',
+            'email'     => 'email|required',
+            'message'   => 'required',
+            'website'   => 'required',
+        ]);
+        
+        $comment = new BlogComment;
+        $comment->name  = $request->input('nama');
+        $comment->email = $request->input('email');
+        $comment->message = $request->input('message');
+        $comment->website = $request->input('website');
+        $comment->blog_id = $blogId;
         $comment->save();
         return redirect()->back();
     }

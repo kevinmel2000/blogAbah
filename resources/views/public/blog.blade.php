@@ -24,7 +24,7 @@
                 @foreach ($chunk as $post)
                     <li class="col-md-6">
                         <div class="overlay" data-aos="fade-up" data-aos-duration="1000">
-                            <a href="#" class="blog-container">
+                            <a href="{{route('readBlog',['id'=> $post->id] )}}" class="blog-container">
                                 <div class="blog-img">
                                     <figure><img src="{{$post->image_url}}" alt="img" class="img-fluid"></figure>
                                     <div class="blog-img-inner"></div>
@@ -33,7 +33,7 @@
                                     {{$post->title}}
                                 </h5>
                             </a>
-                            <a href="#">read more</a>
+                            <a href="{{route('readBlog',['id'=> $post->id] )}}">read more</a>
                         </div>
                     </li>
                 @endforeach

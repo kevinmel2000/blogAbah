@@ -40,7 +40,7 @@ class PostController extends Controller
     	$this->validate($request, [
             'title'                =>'required',
             'description'          =>'required',
-            'image-link'           =>'required|url'
+            'image-link'           =>'required|checkdnsrr'
         ]);
 
         $post  				= new Post;
