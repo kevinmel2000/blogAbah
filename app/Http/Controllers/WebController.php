@@ -10,8 +10,25 @@ use App\Comment;
 use App\File;
 use DB;
 use App\BlogComment;
+use App\Repositories\Repository;
+
 class WebController extends Controller
 {
+    protected $postModel;
+    protected $userModel;
+
+    /**
+    *@param Post
+    *
+    *
+    **/
+    public function __construct(Post $post, User $user)
+   {
+       // set the model
+       $this->postModel = new Repository($post);
+       $this->userModel = new Repository($user);
+   }
+
     public function getIndex(){
         $modul = 'index';
         $post  = $this->getOffset('post',0,2);
@@ -27,15 +44,13 @@ class WebController extends Controller
     }
 
     public function getAbout(){
-    	$user = User::all()->first();
+        $user = $this->userModel->getCertainUser(1);
         $modul = 'about';
     	return view('public.about')->with(['user' => $user, 'modul' => $modul]);
     }
 
     public function countPost(){
-        $allPost = Post::all();
-        $count   = count($allPost);
-        return $count;
+        return $this->postModel->countData();
     }
 
     public function getOffset($table,$skip,$limit,$whereClause=null){
@@ -116,14 +131,15 @@ class WebController extends Controller
             'nama'      => 'required',
             'email'     => 'email|required',
             'message'   => 'required',
-            'website'   => 'required',
         ]);
         
         $comment = new BlogComment;
         $comment->name  = $request->input('nama');
         $comment->email = $request->input('email');
         $comment->message = $request->input('message');
-        $comment->website = $request->input('website');
+        if ($request->input('website')!==null) {
+            $comment->website = $request->input('website');
+        }
         $comment->blog_id = $blogId;
         $comment->save();
         return redirect()->back();
@@ -131,7 +147,7 @@ class WebController extends Controller
 
     public function getPhotoPage(){
         $modul = 'photo';
-        $photo = File::all();
+        $photo = File::where('id', '!=', 1)->get();
         return view('public.photo')->with(['modul'=> $modul,
                                            'photo'=> $photo]);
 

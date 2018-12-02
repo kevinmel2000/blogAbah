@@ -43,15 +43,24 @@
         <form data-aos="fade-up" data-aos-duration="1000" 
         action="{{ route( 'commentBlog',['blogId' => $post->id] ) }}" method="post">
             <ul class="row">
-                <li class="col-md-4">
-                    <input type="text" required class="w-100" placeholder="Masukan nama anda" name="nama">
-                </li>
-                <li class="col-md-4">
-                    <input type="email" required class="w-100" placeholder="masukan email anda" name="email">
-                </li>
-                <li class="col-md-4">
-                    <input type="text" required class="w-100" placeholder="Website anda" name="website">
-                </li>
+                @if(Auth::check())
+                    <li class="col-md-4">
+                        <input type="hidden" required class="w-100" placeholder="Masukan nama anda" name="nama" value="{{Auth::user()->name }}">
+                    </li>
+                    <li class="col-md-4">
+                        <input type="hidden" required class="w-100" placeholder="masukan email anda" name="email" value="{{Auth::user()->email }}">
+                    </li>
+                @else
+                   <li class="col-md-4">
+                        <input type="text" required class="w-100" placeholder="Masukan nama anda" name="nama">
+                    </li>
+                    <li class="col-md-4">
+                        <input type="email" required class="w-100" placeholder="masukan email anda" name="email">
+                    </li>
+                    <li class="col-md-4">
+                        <input type="text" required class="w-100" placeholder="Website anda" name="website">
+                    </li>
+                @endif
                 <li class="col-12">
                     <textarea class="w-100" required placeholder=" Pesan anda" name="message"></textarea>
                 </li>
