@@ -34,7 +34,17 @@
                             <li class="nav-item">
                             <a class="nav-link text-black" href="{{route('blog',['page'=> 1])}}">
                         @endif
-                                blog
+                                Blog
+                            </a>
+                        </li>
+                        @if($modul =='photo')
+                            <li class="nav-item active">
+                            <a class="nav-link active text-black" href="{{route('photo')}}">
+                        @else
+                            <li class="nav-item">
+                            <a class="nav-link text-black" href="{{route('photo')}}">
+                        @endif
+                                Photo
                             </a>
                         </li>
                        

@@ -7,6 +7,7 @@ use App\Http\Requests;
 use App\User;
 use App\Post;
 use App\Comment;
+use App\File;
 use DB;
 use App\BlogComment;
 class WebController extends Controller
@@ -111,7 +112,6 @@ class WebController extends Controller
     }
 
     public function postBlogComment( Request $request , $blogId){
-       //
         $this->validate($request,[
             'nama'      => 'required',
             'email'     => 'email|required',
@@ -127,5 +127,13 @@ class WebController extends Controller
         $comment->blog_id = $blogId;
         $comment->save();
         return redirect()->back();
+    }
+
+    public function getPhotoPage(){
+        $modul = 'photo';
+        $photo = File::all();
+        return view('public.photo')->with(['modul'=> $modul,
+                                           'photo'=> $photo]);
+
     }
 }

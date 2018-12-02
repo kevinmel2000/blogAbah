@@ -137,6 +137,11 @@ Route::get('/about',[
     'as'   => 'about' 
 ]);
 
+Route::get('/blog/photo',[
+    'uses' => 'WebController@getPhotoPage',
+    'as'   => 'photo'
+]);
+
 Route::get('/blog/{page}',[
     'uses' => 'WebController@getBlog',
     'as'   => 'blog'
@@ -156,4 +161,6 @@ Route::post('/blog/comment/{blogId}',[
     'uses' => 'WebController@postBlogComment',
     'as'   => 'commentBlog'
 ]);
+
+
 

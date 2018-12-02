@@ -1,7 +1,7 @@
 <header class="fixed-top p-auto">
     <div class="container">
         <nav class="navbar navbar-expand p-0">
-            <a class="navbar-brand mr-0 pr-4" href="index.html">
+            <a class="navbar-brand mr-0 pr-4" href="{{route('index')}}">
                 <img src="{{asset('images/logo2.png')}}" alt=''>
             </a>
             <a href="javascript:void(0)" id="cls-btn">&times;</a>
@@ -34,7 +34,17 @@
                         <li class="nav-item">
                         <a class="nav-link text-white" href="{{route('blog',['page'=> 1])}}">
                     @endif
-                            blog
+                            Blog
+                        </a>
+                    </li>
+                    @if($modul =='photo')
+                        <li class="nav-item active">
+                        <a class="nav-link active text-white" href="{{route('photo')}}">
+                    @else
+                        <li class="nav-item">
+                        <a class="nav-link text-white" href="{{route('photo')}}">
+                    @endif
+                          Photo
                         </a>
                     </li>
 
