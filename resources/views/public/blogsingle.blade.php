@@ -11,7 +11,8 @@
 
 <section class="banner innerpage-banner contact-banner">
     <div class="container">
-        <h1 data-aos="fade-up" data-aos-duration="1000">read our blog</h1>
+        <h1 data-aos="fade-up" data-aos-duration="1000">Blog</h1>
+        <br><br><br><br><br><br><br><br><br><br><br><br>
     </div>
 </section>
 

@@ -34,17 +34,18 @@
                             <figure style="background:url({{asset('/').$i->title}}); background-position: center right"></figure>
                         </a>
                     </li>
-                    @endforeach
+                    @endforeach 
                 </ul>
                 <ul id="tab-2" class="tab-content article-section">
                     @foreach($post as $p)
                         <li>
-                            <a href="#">
+                            <a href="{{route('readBlog',['id' => $p->id])}}">
                                 <figure style="background:url({{$p->image_url}}); background-position: center right"></figure>
                                 <h4>{{$p->title}}</h4>
-                                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repudiandae iste deserunt a
-                                    rerum temporibus quidem consequuntur facilis fugit laborum reprehenderit!</p>
-                                <a href="#" class="article-btn">Baca</a>
+                                <p>
+                                    {{ strip_tags( mb_substr($p->body, 0, 100) )  }} ...
+                                </p>
+                                <a href="{{route('readBlog',['id' => $p->id])}}" class="article-btn">Baca</a>
                             </a>
                         </li>
                     @endforeach

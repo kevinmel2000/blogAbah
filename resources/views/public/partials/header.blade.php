@@ -2,7 +2,7 @@
     <div class="container">
         <nav class="navbar navbar-expand p-0">
             <a class="navbar-brand mr-0 pr-4" href="{{route('index')}}">
-                <img src="{{asset('images/logo2.png')}}" alt=''>
+                <img src="{{asset('images/logo2.png')}}" alt='' style="padding-top: 15px;">
             </a>
             <a href="javascript:void(0)" id="cls-btn">&times;</a>
             <div class="navbar-collapse nav-sec" id="sidenav">

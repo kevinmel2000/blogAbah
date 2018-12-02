@@ -61,12 +61,14 @@ class WebController extends Controller
                     ->where($whereClause['value'],
                             $whereClause['clause'],
                             $whereClause['value2'])
+                    ->orderBy($table .'.updated_at','DESC')
                     ->get());
         }
         else{
             $item  = collect(DB::table($table)
                     ->skip($skip)
                     ->take($limit)
+                    ->orderBy($table .'.updated_at','DESC')
                     ->get());
         }
         return $item;
