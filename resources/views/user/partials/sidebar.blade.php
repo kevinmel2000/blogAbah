@@ -46,4 +46,13 @@
            <i class="fa fa-comment"></i>
             <span>Comment</span></a>
         </li>
+        @if($modul == 'pdf')
+          <li class="nav-item active">
+        @else
+         <li class="nav-item">
+        @endif
+          <a class="nav-link" href="{{route('dashboard.pdf')}}">
+           <i class="fa fa-file"></i>
+            <span>PDF</span></a>
+        </li>
       </ul>

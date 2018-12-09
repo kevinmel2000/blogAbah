@@ -1,6 +1,6 @@
 var postID;
 var potoID;
-
+var pdfID;
 $(document).ready(function(){
     $('.yesDelete').click(function(){
         	$.ajax({
@@ -32,6 +32,21 @@ $(document).ready(function(){
 		});
     });
 
+    $('.deletePdf').click(function(){
+        	$.ajax({
+		    type: 'GET',
+		    dataType: 'JSON',
+		    data: { 	id: pdfID  },
+		    url: deletepdfurl,
+		    success: function(data){
+		       location.reload();
+		    },
+		    error: function(xhr){
+		        console.log(xhr.responseText);
+		    }
+		});
+    });
+
 });
 
 function confimrationDelete(id){
@@ -42,6 +57,15 @@ function confimrationDelete(id){
 function confirmPotoDelete(id){
 	potoID= id;
 	$('#myModal').modal();
+}
+
+function uploadPDF() {
+	$('#pdf_upload').modal();
+}
+
+function deletePDF(pdf_id){
+	pdfID = pdf_id;
+	$('#delete_pdf').modal();
 }
 
 /*

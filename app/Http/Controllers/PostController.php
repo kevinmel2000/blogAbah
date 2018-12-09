@@ -12,6 +12,7 @@ use Auth;
 use DB;
 use Session;
 use App\File;
+use App\pdf;
 use Carbon\Carbon;
 
 class PostController extends Controller
@@ -180,6 +181,43 @@ class PostController extends Controller
         $allComment = Comment::all();
         $count   = count($allComment);
         return $count;
+    }
+
+    public function getPdfUpload()
+    {
+        $modul = 'pdf';
+        $pdf   = pdf::all(); 
+        return view('user.upload_pdf')->with(['modul' => $modul, 'pdf'  => $pdf]);
+    }
+
+    public function uploadPDF(Request $req)
+    {
+       $this->validate($req,[
+            'pdf' => 'mimes:pdf'
+        ]);
+
+        $pdf            =  new pdf;
+        $now            = Carbon::now()->format('M_d_Y_H_i_s');
+        $pdf->name      = 'pdf_'.$now.'.pdf';
+        if (Input::hasFile('pdf')) {
+            $file = Input::file('pdf');
+            $file->move(public_path().'/',$pdf->name);
+            $pdf->size      = $file->getClientsize();
+            $pdf->type      = $file->getClientMimeType();
+            $pdf->user_id   = Auth::user()->id;
+        }
+        $pdf->save();
+        $message = "Pdf Sucessfully upload";
+        return redirect()->route('dashboard.pdf')->with(['success_message'=> $message]);
+    }
+
+    public function deletePdf(Request $req)
+    {
+        $pdf = pdf::find($req['id']);
+        $pdf->delete();
+        return response()->json([
+            'data' => $req['id']
+        ]);
     }
 
 }

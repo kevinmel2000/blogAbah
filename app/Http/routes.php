@@ -123,6 +123,21 @@ Route::group(['middleware'=>'auth'],function(){
         'uses'  => 'PostController@getComment',
         'as'    => 'dashboard.comment'
     ]);
+
+    Route::get('/dashboard/pdf/manage',[
+        'uses'  => 'PostController@getPdfUpload',
+        'as'    => 'dashboard.pdf'
+    ]);
+
+    Route::post('/dashboard/pdf/upload',[
+        'uses' => 'PostController@uploadPDF',
+        'as'   => 'dashboard.uploadpdf'
+    ]);
+
+    Route::get('/dashboard/pdf/delete',[
+        'uses' => 'PostController@deletePdf',
+        'as'   => 'dashboard.deletepdf'
+    ]);
 });
 
 /*for all*/
