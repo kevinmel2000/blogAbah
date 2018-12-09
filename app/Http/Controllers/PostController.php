@@ -11,7 +11,8 @@ use App\Comment;
 use Auth;
 use DB;
 use Session;
-use App\File;
+use App\Image;
+use File;
 use App\pdf;
 use Carbon\Carbon;
 
@@ -92,7 +93,7 @@ class PostController extends Controller
 
     public function getImage(){
         $modul = "image";
-        $file = File::all();
+        $file = Image::all();
         return view('user.image')->with(['image'=>$file, 'modul'=> $modul]);
     }
 
@@ -122,7 +123,9 @@ class PostController extends Controller
     }
 
     public function getDeleteImg( Request $request){
-        $img = File::find($request['id']);
+        $img = Image::find($request['id']);
+        $url = public_path().'/'.$img->title;
+        if(File::exists($url)) File::delete($url);
         $img->delete();
         return response()->json([
             'data' => $request['id']
@@ -193,18 +196,22 @@ class PostController extends Controller
     public function uploadPDF(Request $req)
     {
        $this->validate($req,[
-            'pdf' => 'mimes:pdf'
+            'pdf'           => 'mimes:pdf',
+            'title'         => 'required|max:255',
+            'description'   => 'required|max:1000'
         ]);
 
         $pdf            =  new pdf;
         $now            = Carbon::now()->format('M_d_Y_H_i_s');
-        $pdf->name      = 'pdf_'.$now.'.pdf';
+        $pdf->name      = 'pdf_'. $now . '.pdf';
         if (Input::hasFile('pdf')) {
             $file = Input::file('pdf');
             $file->move(public_path().'/',$pdf->name);
-            $pdf->size      = $file->getClientsize();
-            $pdf->type      = $file->getClientMimeType();
-            $pdf->user_id   = Auth::user()->id;
+            $pdf->size          = $file->getClientsize();
+            $pdf->type          = $file->getClientMimeType();
+            $pdf->title         = $req->input('title');
+            $pdf->description   = $req->input('description');
+            $pdf->user_id       = Auth::user()->id;
         }
         $pdf->save();
         $message = "Pdf Sucessfully upload";
@@ -214,9 +221,11 @@ class PostController extends Controller
     public function deletePdf(Request $req)
     {
         $pdf = pdf::find($req['id']);
+        $url = public_path().'/'.$pdf->name;
+        if(File::exists($url)) File::delete($url);
         $pdf->delete();
-        return response()->json([
-            'data' => $req['id']
+        return response()->json ([
+            'data' => 'suceess delete pdf',
         ]);
     }
 

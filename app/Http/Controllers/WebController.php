@@ -7,7 +7,8 @@ use App\Http\Requests;
 use App\User;
 use App\Post;
 use App\Comment;
-use App\File;
+use App\Image;
+use App\pdf;
 use DB;
 use App\BlogComment;
 use App\Repositories\Repository;
@@ -149,9 +150,18 @@ class WebController extends Controller
 
     public function getPhotoPage(){
         $modul = 'photo';
-        $photo = File::where('id', '!=', 1)->get();
+        $photo = Image::where('id', '!=', 1)->get();
         return view('public.photo')->with(['modul'=> $modul,
                                            'photo'=> $photo]);
 
     }
+
+    public function getPdfPage()
+    {
+        $modul = 'pdf';
+        $pdf  = $this->getOffset('pdf',0,6);
+        return view('public.pdf')->with(['pdf' => $pdf,
+                                         'modul'=> $modul,]);
+    }
+    
 }

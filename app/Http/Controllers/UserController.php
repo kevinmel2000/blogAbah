@@ -8,8 +8,7 @@ use Illuminate\Support\Facades\Hash;
 
 use App\Http\Requests;
 use App\User;
-use App\File;
-
+use App\Image;
 use Auth;
 use Session;
 
@@ -21,7 +20,7 @@ class UserController extends Controller
     }
 
     public function getDasboardPage(){
-        $imageProfile = File::where('user_id',Auth::user()->id)->first();
+        $imageProfile = Image::where('user_id',Auth::user()->id)->first();
         $userData     = User::find(Auth::user()->id);
         $modul        = 'profile';
         return view('user.dashboard')->with(['photo'    => $imageProfile->name,
@@ -60,7 +59,7 @@ class UserController extends Controller
         $this->validate($request,[
             'photo' => 'mimes:jpeg|dimensions:max_width=2500,max_height=2500'
         ]);
-        $currentImg = File::where('user_id',Auth::user()->id)->first();
+        $currentImg = Image::where('user_id',Auth::user()->id)->first();
         if ($currentImg) {
             $img = $currentImg;
         }

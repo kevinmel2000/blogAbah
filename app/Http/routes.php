@@ -142,6 +142,7 @@ Route::group(['middleware'=>'auth'],function(){
 
 /*for all*/
 
+
 Route::get('/',[
     'uses' => 'WebController@getIndex',
     'as'   => 'index'
@@ -155,6 +156,10 @@ Route::get('/about',[
 Route::get('/blog/photo',[
     'uses' => 'WebController@getPhotoPage',
     'as'   => 'photo'
+]);
+Route::get('/blog/pdf',[
+    'uses' => 'WebController@getPdfPage',
+    'as'   => 'pdf'
 ]);
 
 Route::get('/blog/{page}',[
@@ -176,6 +181,7 @@ Route::post('/blog/comment/{blogId}',[
     'uses' => 'WebController@postBlogComment',
     'as'   => 'commentBlog'
 ]);
+
 
 
 

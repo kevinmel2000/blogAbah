@@ -126,6 +126,14 @@
                           <label >Upload New PDF</label> <small>(Must be .PDF )</small>
                           <input type="file" class="form-control-file" name="pdf">
                       </div>
+                      <div class="form-group">
+                         <label>File Name</label>
+                         <input type="text" name="title" maxlength="255" class="form-control">
+                      </div>
+                      <div class="form-group">
+                         <label>Description</label>
+                         <textarea type="text" name="description" maxlength="1000" class="form-control"></textarea>
+                      </div>
                       <button type="submit" class="btn btn-primary mb-2">Upload PDF</button>
                       {{ csrf_field() }}
                   </form>

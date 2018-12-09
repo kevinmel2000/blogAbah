@@ -47,7 +47,16 @@
                                 Photo
                             </a>
                         </li>
-                       
+                        @if($modul =='pdf')
+                            <li class="nav-item active">
+                            <a class="nav-link active text-black" href="#">
+                        @else
+                            <li class="nav-item">
+                            <a class="nav-link text-black" href="#">
+                        @endif
+                                pdf
+                            </a>
+                        </li>
                         <li>
                             <p class="m-0"> ©2018, All Rights Reserved. Designed By Elbananda Permana</a></p>
                         </li>
