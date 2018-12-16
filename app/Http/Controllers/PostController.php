@@ -106,16 +106,16 @@ class PostController extends Controller
         $this->validate($request,[
             'image' => 'mimes:jpeg|dimensions:max_width=2500,max_height=2500'
         ]);
-        $img            =  new File;
+        $img            =  new Image;
         $now  = Carbon::now()->format('M_d_Y_H_i_s');
         $img->title     = 'image_'.$now.'.jpg';
+        $img->user_id   = Auth::user()->id;
         if (Input::hasFile('image')) {
             $file = Input::file('image');
             $file->move(public_path().'/',$img->title);
             $img->name      = 'image'.$now.'.jpg';
             $img->size      = $file->getClientsize();
             $img->type      = $file->getClientMimeType();
-            $img->user_id   = Auth::user()->id;
         }
         $img->save();
         $message = "Photo Sucessfully upload";
