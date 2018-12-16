@@ -198,7 +198,8 @@ class PostController extends Controller
        $this->validate($req,[
             'pdf'           => 'mimes:pdf',
             'title'         => 'required|max:255',
-            'description'   => 'required|max:1000'
+            'description'   => 'required|max:1000',
+            'url'           => 'required'
         ]);
 
         $pdf            =  new pdf;
@@ -212,6 +213,7 @@ class PostController extends Controller
             $pdf->title         = $req->input('title');
             $pdf->description   = $req->input('description');
             $pdf->user_id       = Auth::user()->id;
+            $pdf->image_url     = $req->input('url');
         }
         $pdf->save();
         $message = "Pdf Sucessfully upload";

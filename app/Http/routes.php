@@ -157,7 +157,7 @@ Route::get('/blog/photo',[
     'uses' => 'WebController@getPhotoPage',
     'as'   => 'photo'
 ]);
-Route::get('/blog/pdf',[
+Route::get('/blog/pdf/{page}',[
     'uses' => 'WebController@getPdfPage',
     'as'   => 'pdf'
 ]);

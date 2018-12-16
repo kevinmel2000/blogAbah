@@ -18,11 +18,6 @@ class WebController extends Controller
     protected $postModel;
     protected $userModel;
 
-    /**
-    *@param Post
-    *
-    *
-    **/
     public function __construct(Post $post, User $user)
    {
        // set the model
@@ -38,10 +33,13 @@ class WebController extends Controller
                         'clause' => '!=',
                         'value2' =>  1   ];
         $file  = $this->getOffset('files',0,6, $whereClause);
-    	return view('public.index')->with(['post' => $post,
-                                           'img'  => $file,
-                                            'modul'=> $modul,
-                                            'sixpost'=> $sixpost]);
+        $pdf   = $this->getOffset('pdf',0,2);
+    	return view('public.index')->with([ 'post'   => $post,
+                                            'img'    => $file,
+                                            'pdf'    => $pdf,
+                                            'modul'  => $modul,
+                                            'sixpost'=> $sixpost
+                                         ]);
     }
 
     public function getAbout(){
@@ -156,12 +154,34 @@ class WebController extends Controller
 
     }
 
-    public function getPdfPage()
+    public function countPdf()
     {
-        $modul = 'pdf';
-        $pdf  = $this->getOffset('pdf',0,6);
-        return view('public.pdf')->with(['pdf' => $pdf,
-                                         'modul'=> $modul,]);
+        $pdf = pdf::all();
+        return count($pdf);
+    }
+    public function getPdfPage($page){
+        $modul        = 'pdf';
+        $page         = (int)$page;
+        $limit        = 6;
+        $offset       = ($limit * ($page-1));
+        $pdf          = $this->getOffset('pdf',$offset,$limit);
+        $count        = $this->countPdf();
+        $totalPage    = (int)ceil($count/$limit);
+        $pageControl  = [ 'nextPage' =>null,
+                          'prevPage' =>null];
+        if ((($page==1) && ($totalPage !==1)) || $page < $totalPage ) {
+            $pageControl['nextPage']=1;
+        }
+        if (($page<=$totalPage) && ($page!==1)){
+            $pageControl['prevPage']=1;
+        }
+        return view('public.pdf')->with(['pdf'        => $pdf,
+                                          'count'       => $count,
+                                          'totalPage'   => $totalPage,
+                                          'pageControl' => $pageControl,
+                                          'page'        => $page,
+                                          'modul'       => $modul,
+                                          ]);
     }
     
 }

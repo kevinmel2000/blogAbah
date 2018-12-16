@@ -18,30 +18,38 @@
 
 <section class="blog-page">
     <div class="container">
-        ini halaman Pdf
          <ul class="row">
             @foreach ($pdf->chunk(2) as $chunk)
                 @foreach ($chunk as $pdf)
                     <li class="col-md-6">
                         <div class="overlay" data-aos="fade-up" data-aos-duration="1000">
-                            <a href="#" class="blog-container">
+                            <a href="{{ asset ('/').$pdf->name }}" class="blog-container">
                                 <div class="blog-img">
-                                    <figure><img src="#" alt="img" class="img-fluid"></figure>
+                                    <figure><img src="{{$pdf->image_url}}" alt="img" class="img-fluid"></figure>
                                     <div class="blog-img-inner"></div>
                                 </div>
-                                <h5>
-                                    {{$pdf->name}}
-                                </h5>
+                                <h5>{{$pdf->title}}</h5>
+                                <p>{{$pdf->description}}</p>
                             </a>
-                            <a href="#">read more</a>
+                            <a href="{{ asset('/').$pdf->name }}">Preview PDF</a>
                         </div>
                     </li>
                 @endforeach
             @endforeach
         </ul>
+        <div class="navigation">
+            <ul>@if($pageControl['prevPage']!==null)
+                    <li><a  href="{{route('pdf',['page'=>($page-1)])}}"> < </a></li>
+                @endif
+                @if($pageControl['nextPage']!==null)
+                    <li><a  href="{{route('pdf',['page'=>($page+1)])}}"> > </a></li>
+                @endif
+            </ul>
+        </div>
     </div>
 </section>
 
+@include('public.partials.contact')
 @include('public.partials.footer')
 
 <button class="scrolltop-btn">

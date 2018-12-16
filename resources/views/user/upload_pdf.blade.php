@@ -61,6 +61,7 @@
                   <thead>
                     <tr>
                         <th>PDF</th>
+                        <th>Description</th>
                         <th>Created Date</th>
                         <th>Action Button</th>
                     </tr>
@@ -68,6 +69,7 @@
                    @foreach($pdf as $file)
                     <tr>
                       <td>{{$file->name}}</td>
+                      <td>{{$file->description}}</td>
                       <td>{{$file->created_at}}</td>
                       <td>
                         <div class="btn-group" role="group" >
@@ -125,6 +127,10 @@
                       <div class="form-group">
                           <label >Upload New PDF</label> <small>(Must be .PDF )</small>
                           <input type="file" class="form-control-file" name="pdf">
+                      </div>
+                      <div class="form-group">
+                          <label>Image Thumbnail for the PDF (url)</label>
+                          <input type="text" class="form-control" name="url">
                       </div>
                       <div class="form-group">
                          <label>File Name</label>

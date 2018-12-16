@@ -49,10 +49,10 @@
                     </li>
                      @if($modul =='pdf')
                         <li class="nav-item active">
-                        <a class="nav-link active text-white" href="{{route('pdf')}}">
+                        <a class="nav-link active text-white" href="{{route('pdf',['page' => 1 ])}}">
                     @else
                         <li class="nav-item">
-                        <a class="nav-link text-white" href="{{route('pdf')}}">
+                        <a class="nav-link text-white" href="{{route('pdf',['page' => 1 ])}}">
                     @endif
                             pdf
                         </a>

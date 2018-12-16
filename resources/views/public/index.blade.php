@@ -61,43 +61,20 @@
 
                 </ul>
                 <ul id="tab-4" class="tab-content pricing-section">
+                    @foreach($pdf as $file)
                     <li>
                         <div class="content">
-                            <h2>Jurnal</h2>
-                            <h6>Judul Jurnal 1</h6>
+                            <h2>PDF Content</h2>
+                            <h6>{{$file->title}}</h6>
                         </div>
                         <ul class="features">
-                            <li>Tentang Jurnal ini</li>
-                            <p>
-                                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repudiandae iste deserunt a
-                                rerum temporibus quidem consequuntur facilis fugit laborum reprehenderit!
-                                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repudiandae iste deserunt a
-                                rerum temporibus quidem consequuntur facilis fugit laborum reprehenderit!
-                                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repudiandae iste deserunt a
-                                rerum temporibus quidem consequuntur facilis fugit laborum reprehenderit!
-                            </p>
+                            <li>Tentang Jurnal / About the journal</li>
+                            <p>{{$file->description}}</p>
                         </ul>
-                        <a href="blogsingle.html" class="buy-now">Lihat</a>
+                        <a href="{{ asset('/').$file->name }}" class="buy-now">Preview PDF</a>
                     </li>
-                    <li>
-                        <div class="content">
-                             <h2>Jurnal</h2>
-                            <h6>Judul Jurnal 1</h6>
-                        </div>
-                        <ul class="features">
-                            <p>
-                                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repudiandae iste deserunt a
-                                rerum temporibus quidem consequuntur facilis fugit laborum reprehenderit!
-                                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repudiandae iste deserunt a
-                                rerum temporibus quidem consequuntur facilis fugit laborum reprehenderit!
-                                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repudiandae iste deserunt a
-                                rerum temporibus quidem consequuntur facilis fugit laborum reprehenderit!
-                            </p>
-                        </ul>
-                        <a href="blogsingle.html" class="buy-now">Lihat</a>
-                    </li>
+                    @endforeach
                 </ul>
-                
             </div>
         </div>
     </div>
