@@ -66,7 +66,7 @@
                     @foreach($post as $p)
                     <tr>
                       <td>{{$p->title}}</td>
-                      <td>{{$p->body}}</td>
+                      <td>{{strip_tags( mb_substr($p->body, 0, 100) )  }} ...</td>
                       <td>{{$p->created_at}}</td>
                       <td>
                       	<div class="btn-group" role="group" aria-label="Basic example">

@@ -1,6 +1,9 @@
 var postID;
 var potoID;
 var pdfID;
+
+//for edit pdf;
+var description,url,title;
 $(document).ready(function(){
     $('.yesDelete').click(function(){
         	$.ajax({
@@ -47,6 +50,9 @@ $(document).ready(function(){
 		});
     });
 
+
+
+
 });
 
 function confimrationDelete(id){
@@ -67,6 +73,26 @@ function deletePDF(pdf_id){
 	pdfID = pdf_id;
 	$('#delete_pdf').modal();
 }
+
+function editPDF(pdf_id,pdf_title,pdf_description,pdf_url) {
+	pdfID 		= pdf_id;
+	description = pdf_description;
+	title 		= pdf_title;
+	url 		= pdf_url;
+
+	$("#pdf_url").val(pdf_url);
+	$("#pdf_title").val(pdf_title);
+	$("#pdf_description").val(pdf_description);
+	$("#pdf_id").val(pdf_id);
+	$("#pdf_edit").modal();
+}
+
+function share(url){
+	console.log(url);
+	$("#modal-share").modal();
+	$("#share-link").val(url);
+}
+
 
 /*
 

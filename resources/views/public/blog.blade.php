@@ -20,31 +20,35 @@
     <div class="container">
         <h2 data-aos="fade-up" data-aos-duration="1000">read latest articles</h2>
         <ul class="row">
-            @foreach ($post->chunk(2) as $chunk)
-                @foreach ($chunk as $post)
-                    <li class="col-md-6">
-                        <div class="overlay" data-aos="fade-up" data-aos-duration="1000">
-                            <a href="{{route('readBlog',['id'=> $post->id] )}}" class="blog-container">
-                                <div class="blog-img">
-                                    <figure><img src="{{$post->image_url}}" alt="img" class="img-fluid"></figure>
-                                    <div class="blog-img-inner"></div>
-                                </div>
-                                <h5>
-                                    {{$post->title}}
-                                </h5>
-                            </a>
-                            <a href="{{route('readBlog',['id'=> $post->id] )}}">read more</a>
-                        </div>
-                    </li>
+            @if($count > 0 )
+                @foreach ($post->chunk(2) as $chunk)
+                    @foreach ($chunk as $post)
+                        <li class="col-md-6">
+                            <div class="overlay" data-aos="fade-up" data-aos-duration="1000">
+                                <a href="{{route('readBlog',['id'=> $post->id] )}}" class="blog-container">
+                                    <div class="blog-img">
+                                        <figure><img src="{{$post->image_url}}" alt="img" class="img-fluid"></figure>
+                                        <div class="blog-img-inner"></div>
+                                    </div>
+                                    <h5>
+                                        {{$post->title}}
+                                    </h5>
+                                </a>
+                                <a href="{{route('readBlog',['id'=> $post->id] )}}">read more</a>
+                            </div>
+                        </li>
+                    @endforeach
                 @endforeach
-            @endforeach
+            @else
+                <h1>No data to display</h1>
+            @endif
         </ul>
 
         <div class="navigation">
-            <ul>@if($pageControl['prevPage']!==null)
+            <ul>@if($pageControl['prevPage']!==null && $count > 0 )
                     <li><a  href="{{route('blog',['page'=>($page-1)])}}"> < </a></li>
                 @endif
-                @if($pageControl['nextPage']!==null)
+                @if($pageControl['nextPage']!==null && $count > 0 )
                     <li><a  href="{{route('blog',['page'=>($page+1)])}}"> > </a></li>
                 @endif
             </ul>

@@ -138,6 +138,11 @@ Route::group(['middleware'=>'auth'],function(){
         'uses' => 'PostController@deletePdf',
         'as'   => 'dashboard.deletepdf'
     ]);
+
+    Route::post('/dashboard/pdf/edit',[
+        'uses' => 'PostController@editPdf',
+        'as'   => 'dashboard.editpdf'
+    ]);
 });
 
 /*for all*/
@@ -157,6 +162,7 @@ Route::get('/blog/photo',[
     'uses' => 'WebController@getPhotoPage',
     'as'   => 'photo'
 ]);
+
 Route::get('/blog/pdf/{page}',[
     'uses' => 'WebController@getPdfPage',
     'as'   => 'pdf'

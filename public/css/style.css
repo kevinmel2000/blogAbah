@@ -2687,3 +2687,10 @@ section.contact-page ul li:nth-child(2) {
         line-height: 37px;
     }
 }
+
+.image-arhcive{
+    height: auto; 
+    width: auto; 
+    max-width: 200px; 
+    max-height: 200px;
+}

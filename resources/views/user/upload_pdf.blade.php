@@ -68,12 +68,13 @@
                   </thead>
                    @foreach($pdf as $file)
                     <tr>
-                      <td>{{$file->name}}</td>
+                      <td>{{$file->title}}</td>
                       <td>{{$file->description}}</td>
                       <td>{{$file->created_at}}</td>
                       <td>
                         <div class="btn-group" role="group" >
                             <a href="{{ asset('/').$file->name }}" class="button btn btn-primary btn-sm">Preview</a>
+                            <a href="#" class="button btn btn-success btn-sm" onclick='editPDF({{$file->id}},"{{$file->title}}","{{$file->description}}","{{$file->image_url}}")'>Edit</a>
                             <a href="#" class="button btn btn-danger btn-sm" onclick="deletePDF({{$file->id}})"> Delete</a>
                         </div>
                       </td>
@@ -111,7 +112,7 @@
 			      </div>
 			    </div>
 			  </div>
-        <!-- Modal PDF -->
+        <!-- Modal upload PDF -->
          <div class="modal fade" id="pdf_upload" role="dialog">
           <div class="modal-dialog">
             <!-- Modal content-->
@@ -141,6 +142,40 @@
                          <textarea type="text" name="description" maxlength="1000" class="form-control"></textarea>
                       </div>
                       <button type="submit" class="btn btn-primary mb-2">Upload PDF</button>
+                      {{ csrf_field() }}
+                  </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Modal edit PDF -->
+         <div class="modal fade" id="pdf_edit" role="dialog">
+          <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenterTitle">PDF Edit</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                   <form action="{{route('dashboard.editpdf')}}" method="post">
+                      <div class="form-group">
+                          <label>Image Thumbnail for the PDF (url)</label>
+                          <input id="pdf_url" type="text" class="form-control" name="url" value ="">
+                          <input type="hidden" id="pdf_id" name="id" value="">
+                      </div>
+                      <div class="form-group">
+                         <label>File title</label>
+                         <input id="pdf_title" type="text" name="title" maxlength="255" class="form-control" value="">
+                      </div>
+                      <div class="form-group">
+                         <label>Description</label>
+                         <textarea id="pdf_description" type="text" name="description" maxlength="1000" class="form-control"></textarea>
+                      </div>
+                      <button type="submit" class="btn btn-primary mb-2">Save</button>
                       {{ csrf_field() }}
                   </form>
               </div>

@@ -26,12 +26,12 @@
             @foreach($photo as $poto)
             <li class="col-sm-6 col-md-4">
                 <a href="#" class="lightbox">
-                    <div class="portfolio-gallery" data-aos="fade-up" data-aos-duration="1000">
+                    <div class="" data-aos="fade-up" data-aos-duration="1000">
                         <figure>
                             <img src="{{asset('/').$poto->title}}" alt="one">
                         </figure>
                         <div class="overlay">
-                            <span> This is Heading <br> visit site</span>
+                            <!--<span> This is Heading <br> visit site</span>-->
                         </div>
                     </div>
                 </a>

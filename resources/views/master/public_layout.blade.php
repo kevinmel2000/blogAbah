@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
 	    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	    <meta name="description" content="Personal Blog of iqbal permana">
+	    <meta name="description" content="The Battle of idea">
 	    <meta name="author" content="M iqbal Permana">
 		<title>@yield('title')</title>
 	    <link href="{{asset('css/montserrat_font.css')}}" rel="stylesheet">
@@ -24,6 +24,7 @@
 		<script src="{{asset('js/bootstrap.min.js')}}"></script>
 		<script src="{{asset('js/aos.js')}}"></script>
 		<script src="{{asset('js/script.js')}}"></script>
+		<script src="{{asset('js/main.js')}}"></script>
 		<script>
 		    $(document).on('click', '[data-toggle="lightbox"]', function (event) {
 		        event.preventDefault();

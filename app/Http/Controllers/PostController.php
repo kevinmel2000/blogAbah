@@ -231,4 +231,21 @@ class PostController extends Controller
         ]);
     }
 
+    public function editPdf( Request $req){
+        $this->validate($req,[
+            'title'         => 'required|max:255',
+            'description'   => 'required|max:1000',
+            'url'           => 'required',
+            'id'            => 'required',
+        ]);
+
+        $pdf = pdf::find($req->input('id'));
+        $pdf->image_url           = $req->input('url');
+        $pdf->description   = $req->input('description');
+        $pdf->title         = $req->input('title');
+        $pdf->save();
+
+        return redirect()->back();
+    }
+
 }

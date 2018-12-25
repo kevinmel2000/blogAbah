@@ -175,7 +175,7 @@ class WebController extends Controller
         if (($page<=$totalPage) && ($page!==1)){
             $pageControl['prevPage']=1;
         }
-        return view('public.pdf')->with(['pdf'        => $pdf,
+        return view('public.pdf')->with([ 'pdf'        => $pdf,
                                           'count'       => $count,
                                           'totalPage'   => $totalPage,
                                           'pageControl' => $pageControl,
