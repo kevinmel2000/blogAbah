@@ -109,6 +109,14 @@
 </section>
 
 @include('public.partials.contact')
+<section class="index-services">
+    <div class="container">
+        <h3 data-aos="zoom-in" data-aos-duration="1000">Advertising</h3>
+        @foreach($ads as $iklan)
+            <figure><a href="{{$iklan->url}}" "><img src="{{asset('/').$iklan->file_name}}"" alt="ads" class="img-fluid img-thumbnail rounded"> </a> </figure>
+        @endforeach
+    </div>
+</section>
 @include('public.partials.footer')
 
 <button class="scrolltop-btn">

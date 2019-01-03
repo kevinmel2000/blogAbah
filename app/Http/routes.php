@@ -143,6 +143,26 @@ Route::group(['middleware'=>'auth'],function(){
         'uses' => 'PostController@editPdf',
         'as'   => 'dashboard.editpdf'
     ]);
+
+    Route::get('/dashboard/ads',[
+        'uses' => 'PostController@ads',
+        'as'   => 'dashboard.ads'
+    ]);
+
+    Route::post('/dashboard/uploadAds',[
+        'uses' => 'PostController@uploadAds',
+        'as'   => 'dashboard.uploadAds'
+    ]);
+
+    Route::post('/dashboard/editAds',[
+        'uses' => 'PostController@editAds',
+        'as'   => 'dashboard.editAds'
+    ]);
+
+    Route::get('/dashboard/deleteAds',[
+        'uses' => 'PostController@deleteAds',
+        'as'   => 'dashboard.deleteAds'
+    ]);
 });
 
 /*for all*/

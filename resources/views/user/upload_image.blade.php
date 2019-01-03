@@ -50,7 +50,7 @@
          <hr>
          <form action="#" method="post" enctype="multipart/form-data" >
             <div class="form-group">
-                <label >Upload New Image</label> <small>(Must be .jpeg  , max: 2500 x 2500 px)</small>
+                <label >Upload New Image</label> <small>(Must be .jpeg or .png , max: 2500 x 2500 px)</small>
                 <input type="file" class="form-control-file" name="image">
             </div>
             <button type="submit" class="btn btn-primary mb-2">Upload Image</button>

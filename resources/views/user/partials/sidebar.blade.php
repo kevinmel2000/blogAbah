@@ -55,4 +55,13 @@
            <i class="fa fa-file"></i>
             <span>PDF</span></a>
         </li>
+        @if($modul == 'ads')
+          <li class="nav-item active">
+        @else
+         <li class="nav-item">
+        @endif
+          <a class="nav-link" href="{{route('dashboard.ads')}}">
+           <i class="fa fa-ad"></i>
+            <span>Ads</span></a>
+        </li>
       </ul>

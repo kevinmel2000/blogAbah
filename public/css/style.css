@@ -654,6 +654,14 @@ section.blog-page .navigation ul li:first-child {
 */
 
 /* -------End of Index blog------ */
+section.index-ads{
+    width: 100%;
+    float: left;
+    background: #2d2d2d;
+}
+/* ------index ads------ */
+
+/*-------end of index ads--------*/
 
 
 /* ------index contact------ */

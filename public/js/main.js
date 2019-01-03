@@ -1,6 +1,7 @@
 var postID;
 var potoID;
 var pdfID;
+var adsID;
 
 //for edit pdf;
 var description,url,title;
@@ -50,10 +51,39 @@ $(document).ready(function(){
 		});
     });
 
-
-
+    $('.delete-ads').click(function(){
+    	$.ajax({
+		    type: 'GET',
+		    dataType: 'JSON',
+		    data: { 	id: adsID  },
+		    url: deleteadsurl,
+		    success: function(data){
+		       location.reload();
+		    },
+		    error: function(xhr){
+		        console.log(xhr.responseText);
+		    }
+		});
+    });
 
 });
+
+function deleteAds(id){
+	$('#deleteAds').modal();
+	adsID = id;
+}
+
+function editAds(id,url,description,name){
+	$('#adsEdit').modal();
+	$('#url_edit').val(url);
+	$('#name_edit').val(name);
+	$('#description_edit').val(description);
+	$('#id_edit').val(id);
+}
+
+function uploadAds(){
+	$('#adsModal').modal();
+}
 
 function confimrationDelete(id){
 	postID = id;

@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use App\Http\Requests;
-
 use App\Post;
 use App\Comment;
 use Auth;
@@ -15,11 +14,11 @@ use App\Image;
 use File;
 use App\pdf;
 use Carbon\Carbon;
-
+use App\Ads;
 class PostController extends Controller
 {
     public function getManagePost(){
-    	$post = Post::all();
+        $post = Post::all();
         $modul = 'manage';
         return view('user.manage_post')->with(['post'=> $post,
                                                'modul' => $modul]);
@@ -28,27 +27,27 @@ class PostController extends Controller
     public function getDeletePost( Request $request){
         $post = Post::find($request['id']);
         $post->delete();
-    	return response()->json([
-		    'data' => $request['id']
-		]);
+        return response()->json([
+            'data' => $request['id']
+        ]);
     }
 
     public function getWritePost(){
         $modul = 'write';
-    	return view('user.write_post')->with(['modul'=>$modul]);
+        return view('user.write_post')->with(['modul'=>$modul]);
     }
 
     public function postWritePost(Request $request){
-    	$this->validate($request, [
+        $this->validate($request, [
             'title'                =>'required',
             'description'          =>'required',
             'image-link'           =>'required|url'
         ]);
 
-        $post  				= new Post;
-        $post->title 		= $request->input('title');
-        $post->body  		= $request->input('description');
-        $post->user_id		= Auth::user()->id;
+        $post               = new Post;
+        $post->title        = $request->input('title');
+        $post->body         = $request->input('description');
+        $post->user_id      = Auth::user()->id;
         $post->image_url    = $request->input('image-link');
         $post->save();
 
@@ -104,18 +103,20 @@ class PostController extends Controller
 
     public function postUploadImage(Request $request){
         $this->validate($request,[
-            'image' => 'mimes:jpeg|dimensions:max_width=2500,max_height=2500'
+            'image' => 'mimes:jpeg,png|dimensions:max_width=2500,max_height=2500'
         ]);
-        $img            =  new Image;
-        $now  = Carbon::now()->format('M_d_Y_H_i_s');
-        $img->title     = 'image_'.$now.'.jpg';
-        $img->user_id   = Auth::user()->id;
+
+        
         if (Input::hasFile('image')) {
+            $img            = new Image;
             $file = Input::file('image');
-            $file->move(public_path().'/',$img->title);
-            $img->name      = 'image'.$now.'.jpg';
+            $now            = Carbon::now()->format('M_d_Y_H_i_s');
+            $img->title     = ($file->getClientMimeType() === "image/jpeg") ? 'image_'.$now.'.jpg' : 'image_'.$now.'.png' ;
+            $img->name      = ($file->getClientMimeType() === "image/jpeg") ? 'image_'.$now.'.jpg' : 'image_'.$now.'.png' ;
             $img->size      = $file->getClientsize();
             $img->type      = $file->getClientMimeType();
+            $img->user_id   = Auth::user()->id;
+            $file->move(public_path().'/',$img->title);
         }
         $img->save();
         $message = "Photo Sucessfully upload";
@@ -246,6 +247,68 @@ class PostController extends Controller
         $pdf->save();
 
         return redirect()->back();
+    }
+
+    public function ads(){
+        $modul = 'ads';
+        $ads   = Ads::all();
+        return view('user.manage_ads')->with(['modul' => $modul, 'ads' => $ads]);
+    }
+
+    public function uploadAds(Request $req){
+         $this->validate($req,[
+            'image'         => 'mimes:jpeg,png',
+            'name'          => 'required|max:255',
+            'description'   => 'required|max:1000',
+            'url'           => 'required'
+        ]);
+
+        $ads    =  new Ads;
+        $now    = Carbon::now()->format('M_d_Y_H_i_s');
+        if (Input::hasFile('image')) {
+            $file = Input::file('image');
+
+            $type = ($file->getClientMimeType() === 'images/jpeg') ? '.jpeg' : '.png' ;
+            $ads->file_name     = 'ads_'. $now . $type;
+            $ads->size          = $file->getClientsize();
+            $ads->type          = $file->getClientMimeType();
+            $ads->name          = $req->input('name');
+            $ads->description   = $req->input('description');
+            $ads->user_id       = Auth::user()->id;
+            $ads->url           = $req->input('url');
+            $file->move(public_path().'/',$ads->file_name);
+        }
+        $ads->save();
+        $message = "Ads Sucessfully upload";
+        return redirect()->route('dashboard.ads')->with(['success_message'=> $message]);
+    }
+
+    public function editAds(Request $req){
+        $this->validate($req,[
+            'name'          => 'required|max:255',
+            'description'   => 'required|max:255',
+            'url'           => 'required',
+            'id'            => 'required',
+        ]);
+
+        $ads = Ads::find($req->input('id'));
+        $ads->name          = $req->input('name');
+        $ads->url           = $req->input('url');
+        $ads->description   = $req->input('description');
+        $ads->save();
+        $message = "Ads Successfully updated";
+        return redirect()->back()->with(['success_message' => $message]);
+    }
+
+    public function deleteAds(Request $req)
+    {
+        $ads = Ads::find($req['id']);
+        $url = public_path().'/'.$ads->file_name;
+        if(File::exists($url)) File::delete($url);
+        $ads->delete();
+        return response()->json ([
+            'data' => 'suceess delete ads',
+        ]);
     }
 
 }

@@ -12,6 +12,7 @@ use App\pdf;
 use DB;
 use App\BlogComment;
 use App\Repositories\Repository;
+use App\Ads;
 
 class WebController extends Controller
 {
@@ -34,11 +35,14 @@ class WebController extends Controller
                         'value2' =>  1   ];
         $file  = $this->getOffset('files',0,6, $whereClause);
         $pdf   = $this->getOffset('pdf',0,2);
+        $ads   = Ads::all();
+
     	return view('public.index')->with([ 'post'   => $post,
                                             'img'    => $file,
                                             'pdf'    => $pdf,
                                             'modul'  => $modul,
-                                            'sixpost'=> $sixpost
+                                            'sixpost'=> $sixpost,
+                                            'ads'    => $ads,
                                          ]);
     }
 
