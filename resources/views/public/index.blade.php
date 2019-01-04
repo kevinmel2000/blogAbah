@@ -109,12 +109,33 @@
 </section>
 
 @include('public.partials.contact')
-<section class="index-services">
+<section class="index-ads">
     <div class="container">
-        <h3 data-aos="zoom-in" data-aos-duration="1000">Advertising</h3>
-        @foreach($ads as $iklan)
-            <figure><a href="{{$iklan->url}}" "><img src="{{asset('/').$iklan->file_name}}"" alt="ads" class="img-fluid img-thumbnail rounded"> </a> </figure>
-        @endforeach
+        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                   <center><img class="d-block " src="https://dummyimage.com/1280x640/000/fff&text=Advertising" alt="First slide"></center>
+                </div>
+                @foreach($ads as $iklan)
+                <div class="carousel-item">
+                    <a href="{{$iklan->url}}"><img class="d-block  " src="{{asset('/').$iklan->file_name}}" alt="Second slide"></a>
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5><font style="color: white">{{$iklan->name}}</font></h5>
+                        <p><font style="color: white"> {{$iklan->description}} </font></p>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+            <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+        <hr>
     </div>
 </section>
 @include('public.partials.footer')
@@ -122,6 +143,5 @@
 <button class="scrolltop-btn">
     <i class="fa fa-angle-up"></i>
 </button>
-
 
 @endsection

@@ -257,7 +257,7 @@ class PostController extends Controller
 
     public function uploadAds(Request $req){
          $this->validate($req,[
-            'image'         => 'mimes:jpeg,png',
+            'image'         => 'mimes:jpeg,png|dimensions:max_width=1280,max_height=640,min_width=1280,min_height=640',
             'name'          => 'required|max:255',
             'description'   => 'required|max:1000',
             'url'           => 'required'

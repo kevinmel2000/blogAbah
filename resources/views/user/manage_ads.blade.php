@@ -117,7 +117,7 @@
               <div class="modal-body">
                    <form action="{{route('dashboard.uploadAds')}}" method="post" enctype="multipart/form-data" >
                       <div class="form-group">
-                          <label >Upload Image of Advertising</label> <small>(Must be .PNG/JPG )</small>
+                          <label >Upload Image of Advertising</label> <small><br>(Must be .PNG/JPG  and have  resolution 1280 x 640 px)</small>
                           <input type="file" class="form-control-file" name="image">
                       </div>
                       <div class="form-group">
