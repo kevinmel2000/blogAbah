@@ -70,7 +70,7 @@
                       <td><img src="{{ asset('/').$file->file_name}}" class="rounded image-profile"></td>
                       <td>
                         <div class="btn-group" role="group" >
-                            <a href="#" class="button btn btn-success btn-sm" onclick='editAds({{$file->id}},"{{$file->url}}","{{$file->description}}","{{$file->name}}")'>Edit</a>
+                            <a href="#" class="button btn btn-success btn-sm" onclick='editAds({{$file->id}},"{{$file->url}}","{{$file->name}}","{{$file->description}}") '>Edit</a>
                             <a href="#" class="button btn btn-danger btn-sm" onclick="deleteAds({{$file->id}})"> Delete</a>
                         </div>
                       </td>
@@ -83,26 +83,26 @@
           </div>
         <!-- /.container-fluid -->
         <!-- Modal -->
-			  <div class="modal fade" id="deleteAds" role="dialog">
-			    <div class="modal-dialog">
-			      <!-- Modal content-->
-			      <div class="modal-content">
-			      	<div class="modal-header">
-				        <h5 class="modal-title" id="exampleModalCenterTitle">Confirmation</h5>
-				        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-				          <span aria-hidden="true">&times;</span>
-				        </button>
-				      </div>
-			        <div class="modal-body">
-			          <p>Do you want to delete this file?</p>
-			        </div>
-			        <div class="modal-footer">
-			           <button type="button" class="btn btn-danger delete-ads">Yes</button>
-			           <button type="button" class="btn btn-default" data-dismiss="modal" id="noDelete">No</button>
-			        </div>
-			      </div>
-			    </div>
-			  </div>
+        <div class="modal fade" id="deleteAds" role="dialog">
+          <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenterTitle">Confirmation</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <p>Do you want to delete this file?</p>
+              </div>
+              <div class="modal-footer">
+                 <button type="button" class="btn btn-danger delete-ads">Yes</button>
+                 <button type="button" class="btn btn-default" data-dismiss="modal" id="noDelete">No</button>
+              </div>
+            </div>
+          </div>
+        </div>
         <!-- Modal upload PDF -->
          <div class="modal fade" id="adsModal" role="dialog">
           <div class="modal-dialog">

@@ -73,7 +73,7 @@ function deleteAds(id){
 	adsID = id;
 }
 
-function editAds(id,url,description,name){
+function editAds(id,url,name,description){
 	$('#adsEdit').modal();
 	$('#url_edit').val(url);
 	$('#name_edit').val(name);
